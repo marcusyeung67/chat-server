@@ -1,26 +1,11 @@
-import { WebSocketServer } from "ws";
+// server.js
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
 
-const PORT = process.env.PORT || 10000;
+wss.on('connection', ws => {
+    console.log("StickC connected");
 
-const wss = new WebSocketServer({ port: PORT });
-
-wss.on("connection", (ws) => {
-  console.log("Client connected");
-
-  ws.on("message", (msg) => {
-    console.log("Received:", msg.toString());
-
-    // Broadcast to all clients
-    wss.clients.forEach((client) => {
-      if (client.readyState === 1) {
-        client.send(msg.toString());
-      }
+    ws.on('message', msg => {
+        console.log("Received from StickC:", msg);
     });
-  });
-
-  ws.on("close", () => {
-    console.log("Client disconnected");
-  });
 });
-
-console.log("WebSocket server running on port", PORT);;
