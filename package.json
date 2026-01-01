@@ -1,7 +1,6 @@
 {
-  "name": "chat-server",
+  "name": "ws-server",
   "version": "1.0.0",
-  "main": "server.js",
   "type": "module",
   "dependencies": {
     "ws": "^8.13.0"
